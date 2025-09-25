@@ -186,6 +186,17 @@ function flushSyncWorkAcrossRoots_impl(
   syncTransitionLanes: Lanes | Lane,
   onlyLegacy: boolean,
 ) {
+  const executionContext = getExecutionContext();
+  if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
+    // Prevent flushing sync work if we're already in the middle of rendering
+    // or committing. Some browsers (older Chrome, Firefox) may synchronously
+    // flush microtasks while an alert/dialog is open, which can cause the
+    // Scheduler to re-enter the work loop and hit invariants like
+    // "Should not already be working." Instead, defer the flush until we've
+    // exited the current render/commit.
+    return;
+  }
+
   if (isFlushingWork) {
     // Prevent reentrancy.
     // TODO: Is this overly defensive? The callers must check the execution
