@@ -21,6 +21,7 @@ export const enableUpdaterTracking: boolean = false;
 export const enableLegacyCache: boolean = __EXPERIMENTAL__;
 export const enableAsyncIterableChildren: boolean = false;
 export const enableFlightWeakThenables: boolean = false;
+export const enableFlightObjectReferences: boolean = false;
 export const enableTaint: boolean = true;
 export const disableCommentsAsDOMContainers: boolean = true;
 export const disableInputAttributeSyncing: boolean = false;
@@ -73,9 +74,6 @@ export const enableSrcObject: boolean = false;
 export const enableHydrationChangeEvent: boolean = false;
 export const enableDefaultTransitionIndicator: boolean = false;
 export const ownerStackLimit = 1e4;
-
-export const enableFragmentRefsInstanceHandles: boolean = true;
-export const enableFragmentRefsTextNodes: boolean = true;
 
 export const enableInternalInstanceMap: boolean = false;
 
